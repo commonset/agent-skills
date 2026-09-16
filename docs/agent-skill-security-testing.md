@@ -72,11 +72,19 @@ Results:
 
 These numbers are not model-independent properties of the Skill. The model is part of the effective review system, so results may vary with model family, model version, execution configuration, context, and surrounding conversation.
 
-## Original deterministic baseline: provenance note
+## Initial deterministic result
 
-We are not publishing a numeric result for the scanner's original pass over the 99-case corpus at this time. Our historical records contain conflicting baseline figures, and we have not yet reconstructed enough provenance to determine whether those figures came from different scanner revisions, scoring logic, or evaluation stages.
+Before we used the 99-case corpus to improve the scanner, the deterministic system produced:
 
-Rather than select one number without sufficient evidence, we will add an original deterministic baseline only when we can tie it to a pinned scanner commit, corpus revision, and scoring procedure. This uncertainty does not change the current diagnostic result or the independently maintained 151-case frozen regression result below.
+- **37/99 exact three-way classifications (37.4%)**
+- **57/99 binary benign-vs-risky classifications (57.6%)**
+- **47/84 risky cases detected (56.0% recall)**
+- **47/52 risky predictions correct (90.4% precision)**
+- **10/15 benign cases remained benign (66.7% specificity)**
+
+This was the original greenfield measurement for the deterministic scanner. The three-way score used the benchmark's evaluation mapping because the deterministic scanner did not natively emit the corpus's `benign`, `review`, and `dangerous` posture labels.
+
+The later **67/99** figure does not conflict with this baseline. It was an intermediate development result recorded in Commonset PR #377 after scanner-improvement work had already begun and before the final risk-composition step. PR #377 then recorded the completed scanner at 89/99 exact. Preserving that chronology matters: **37/99 is the initial greenfield result; 67/99 is an intermediate tuned result; 89/99 is the current diagnostic result on the now-used-for-development corpus.**
 
 ## Current deterministic diagnostic result
 
