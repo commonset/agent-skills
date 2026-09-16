@@ -48,7 +48,7 @@ The expected posture distribution is:
 | Dangerous | 56 |
 | **Total** | **99** |
 
-These cases began as greenfield material. We first evaluated both the semantic Skill and the then-current deterministic scanner before using the corpus to improve the deterministic implementation.
+The 99-case corpus began as greenfield material for the deterministic scanner. Separately, we evaluated Agent Skill Security Review V2.1 in a fresh thread before exposing the answer key. We later used the corpus to improve the deterministic implementation, so the corpus now serves as a diagnostic regression set rather than an independent holdout.
 
 ## Semantic review result
 
@@ -72,21 +72,15 @@ Results:
 
 These numbers are not model-independent properties of the Skill. The model is part of the effective review system, so results may vary with model family, model version, execution configuration, context, and surrounding conversation.
 
-## Initial deterministic result
+## Original deterministic baseline: provenance note
 
-Before the 99-case corpus was used to improve the scanner, the deterministic system produced:
+We are not publishing a numeric result for the scanner's original pass over the 99-case corpus at this time. Our historical records contain conflicting baseline figures, and we have not yet reconstructed enough provenance to determine whether those figures came from different scanner revisions, scoring logic, or evaluation stages.
 
-- **37/99 exact three-way classifications (37.4%)**
-- **57/99 binary benign-vs-risky classifications (57.6%)**
-- **47/84 risky cases detected (56.0% recall)**
-- **47/52 risky predictions correct (90.4% precision)**
-- **10/15 benign cases remained benign (66.7% specificity)**
-
-That comparison was useful because both systems were being evaluated against unfamiliar material at that point.
+Rather than select one number without sufficient evidence, we will add an original deterministic baseline only when we can tie it to a pinned scanner commit, corpus revision, and scoring procedure. This uncertainty does not change the current diagnostic result or the independently maintained 151-case frozen regression result below.
 
 ## Current deterministic diagnostic result
 
-We subsequently used the corpus to improve deterministic package analysis, contextual interpretation, data-flow reasoning, and how corroborating findings are considered together. The current result on the same 99 cases is:
+After we used the corpus to improve deterministic package analysis, contextual interpretation, data-flow reasoning, and how the scanner considers corroborating findings together, the scanner produced the following result on the same 99 cases:
 
 | Expected | Benign | Review | Dangerous |
 | --- | ---: | ---: | ---: |
@@ -109,7 +103,7 @@ The important qualification is that this is now a **diagnostic and regression re
 
 Combining the 151 regression contracts and 99 posture-classification cases into a single `249/250` score would imply that all 250 cases measure the same property. They do not.
 
-The 151-case suite measures whether specified deterministic behavior has regressed. The 99-case suite measures posture classification on a corpus that began as greenfield material but now also serves as a diagnostic regression set. The semantic result additionally depends on the interpreting model.
+The 151-case suite measures whether specified deterministic behavior has regressed. The 99-case suite measures posture classification on a corpus that began as greenfield material for the deterministic scanner but now also serves as a diagnostic regression set. The semantic result additionally depends on the interpreting model.
 
 For that reason, we report the suites separately and preserve the chronology of when each result was obtained.
 
@@ -122,6 +116,13 @@ A credible semantic Skill evaluation should pin at least:
 - the evaluation corpus
 - the execution configuration and relevant context
 - the prediction set before scoring
+
+A credible deterministic comparison should pin at least:
+
+- the scanner commit
+- the corpus revision
+- the scoring implementation and label mapping
+- the evaluation command or procedure
 
 A credible future comparison should also use a fresh holdout corpus that neither the Skill nor the deterministic implementation has been tuned against.
 
