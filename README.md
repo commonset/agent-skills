@@ -12,6 +12,18 @@ This repository contains portable skills that follow the open [Agent Skills spec
 | [`pull-request-review`](skills/pull-request-review/) | Review a code change for correctness, security, regressions, missing tests, maintainability, and material performance issues. |
 | [`release-readiness`](skills/release-readiness/) | Assess whether a change is ready to ship across data, configuration, security, observability, rollout, rollback, and smoke coverage. |
 
+## Agent Skill security research
+
+The [`agent-skill-security-review`](skills/agent-skill-security-review/) skill is the portable semantic-review layer we use when examining untrusted Agent Skills packages. It is designed to distinguish security-relevant capability from evidence of an actual attack path, while treating the package under review as hostile evidence rather than as instructions to follow.
+
+We evaluated **Agent Skill Security Review V2.1** with **GPT-5.6 Sol** against a 99-case greenfield adversarial corpus, then compared those results with Commonset's deterministic security scanner. On that initial corpus, V2.1 + GPT-5.6 Sol produced **81/99 exact benign/review/dangerous classifications** and **95/99 correct benign-vs-risky classifications**. The original deterministic scanner produced **37/99 exact** and **57/99 benign-vs-risky** classifications on the same material.
+
+We subsequently used what those cases exposed to improve the deterministic scanner. Its current diagnostic result on the same 99 cases is **89/99 exact**, **98/99 benign-vs-risky**, with **0 benign false positives**, while the separate **151-case frozen regression suite remains 151/151**. Because those 99 cases informed scanner development, the current deterministic result is a regression/diagnostic measurement rather than a blind estimate of future performance. Model-driven Skill results may also vary by model, version, execution environment, and context.
+
+- [Read the full 250-case write-up](https://commonset.ai/resources/ai-agent-skill-security-testing/)
+- [Review the testing methodology and result boundaries](docs/agent-skill-security-testing.md)
+- [Open Agent Skill Security Review V2.1](skills/agent-skill-security-review/)
+
 ## Design principles
 
 These skills are intentionally small and provider-independent.
