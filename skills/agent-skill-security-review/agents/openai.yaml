@@ -1,0 +1,13 @@
+interface:
+  display_name: Agent Skill Security Review
+  short_description: Adversarial static review of untrusted AI skills and capability
+    packages.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
