@@ -1,10 +1,12 @@
 ---
 name: release-readiness
-description: Assesses whether a software change is ready to ship across data, configuration, security, observability, rollout, rollback, and smoke coverage. Use before deployment, release approval, or production rollout.
+description: Assesses whether a software change is ready to ship across data, configuration,
+  security, observability, rollout, rollback, and smoke coverage. Use before deployment,
+  release approval, or production rollouts.
 license: MIT
 metadata:
   author: Commonset
-  version: "1.0.0"
+  version: 0.1.1
 ---
 
 # Release Readiness
