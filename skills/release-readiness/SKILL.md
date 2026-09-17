@@ -6,7 +6,7 @@ description: Assesses whether a software change is ready to ship across data, co
 license: MIT
 metadata:
   author: Commonset
-  version: 0.1.1
+  version: 0.1.2
 ---
 
 # Release Readiness
